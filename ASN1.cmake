@@ -340,7 +340,7 @@ function(asn1_add_module_library ASN1_LIBRARY_TARGET)
     add_library(${ASN1_LIBRARY_TARGET} INTERFACE IMPORTED ${ASN1_GLOBAL_TARGET})
 
     # set public include directories
-    target_include_directories(${ASN1_LIBRARY_TARGET} INTERFACE ${ASN1_BASE_OUTPUT_DIR} ${ASN1_WORKING_DIRECTORY})
+    set_property(TARGET ${ASN1_LIBRARY_TARGET} APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${ASN1_BASE_OUTPUT_DIR} ${ASN1_WORKING_DIRECTORY})
 
     # set public compile flags
     if (ASN1_EMIT_DEBUG)
@@ -348,7 +348,7 @@ function(asn1_add_module_library ASN1_LIBRARY_TARGET)
     endif()
 
     # set public source files
-    target_sources(${ASN1_LIBRARY_TARGET} INTERFACE ${ASN1_MODULES} ${ASN1_GENERATED_SOURCES})
+    set_property(TARGET ${ASN1_LIBRARY_TARGET} APPEND PROPERTY INTERFACE_SOURCES ${ASN1_MODULES} ${ASN1_GENERATED_SOURCES})
 
     # add Ws2_32 library in compatibility
     if (ASN1C_VERSION VERSION_LESS "0.9.29" AND WIN32)
